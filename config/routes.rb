@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  devise_for :org_people, :controllers => { :passwords => "org_people/passwords", :confirmations => "org_people/confirmations" }
+  devise_scope :org_person do
+    get 'signup', to: 'devise/registrations#new'
+    get 'signin', to: 'devise/sessions#new'
+    get 'signout', to: 'devise/sessions#destroy'
+  end
+
+
+
+
+
+
   resources :catalogues
   root "catalogues#index"
 

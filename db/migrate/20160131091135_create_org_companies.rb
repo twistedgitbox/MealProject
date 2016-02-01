@@ -6,8 +6,8 @@ class CreateOrgCompanies < ActiveRecord::Migration
       t.text :description
       t.string :verification_doc
       t.boolean :verified
-      t.references :type_fee
-      t.belongs_to :type_company
+      t.references :typ_fee
+      t.belongs_to :typ_company
       t.timestamps null: false
     end
   end
