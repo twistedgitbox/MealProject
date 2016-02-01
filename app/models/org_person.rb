@@ -1,7 +1,7 @@
 class OrgPerson < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_and_belongs_to_many :org_contacts
   belongs_to :org_company, foreign_key: "org_company_id"
