@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MealProject</title>
+  <title>ProjectMeal</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <%= render 'layouts/shim' %>
 </head>
 <body class="<%= controller_name %> <%= action_name%>">
   <%= render 'layouts/header' %>
@@ -23,3 +22,4 @@
   <% debug(params) if Rails.env.development? %>
 </body>
 </html>
+
