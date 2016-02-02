@@ -86,3 +86,4 @@ Thumbs.db
 
 .secrets.yml
 secrets.yml
+./config/secrets.yml
