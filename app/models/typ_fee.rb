@@ -1,3 +1,3 @@
 class TypFee < ActiveRecord::Base
-  has_many :TrxOrderFee
+	has_many :TrxOrderFee
 end

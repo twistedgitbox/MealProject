@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160201050042) do
+ActiveRecord::Schema.define(version: 20151010084118) do
 
   create_table "org_companies", force: :cascade do |t|
     t.string   "name",             limit: 255,   null: false
@@ -19,10 +19,10 @@ ActiveRecord::Schema.define(version: 20160201050042) do
     t.text     "description",      limit: 65535
     t.string   "verification_doc", limit: 255
     t.boolean  "verified"
-    t.integer  "type_fee_id",      limit: 4
-    t.integer  "type_company_id",  limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.integer  "typ_fee_id",       limit: 4
+    t.integer  "typ_company_id",   limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "org_companies_contacts", force: :cascade do |t|
@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 20160201050042) do
     t.integer  "typ_region_id",   limit: 4
     t.integer  "org_company_id",  limit: 4
     t.integer  "org_person_id",   limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "org_contacts_people", force: :cascade do |t|
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 20160201050042) do
     t.string   "stripe_currency",        limit: 255
     t.string   "stripe_account_type",    limit: 255
     t.text     "stripe_account_status",  limit: 65535
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "email",                  limit: 255,   default: "", null: false
     t.string   "encrypted_password",     limit: 255,   default: "", null: false
     t.string   "reset_password_token",   limit: 255
@@ -105,21 +105,13 @@ ActiveRecord::Schema.define(version: 20160201050042) do
     t.boolean  "online_order_available",                                                      null: false
     t.float    "tax_amount",             limit: 24,                             default: 0.0
     t.string   "image",                  limit: 255
-    t.datetime "created_at",                                                                  null: false
-    t.datetime "updated_at",                                                                  null: false
-  end
-
-  create_table "shipping_addresses", force: :cascade do |t|
-    t.string   "shipping_address", limit: 255
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "trx_order_fees", force: :cascade do |t|
-    t.float    "fee_amount",   limit: 24, null: false
-    t.integer  "trx_order_id", limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.float   "fee_amount",   limit: 24, null: false
+    t.integer "trx_order_id", limit: 4
   end
 
   create_table "trx_order_items", force: :cascade do |t|
@@ -132,6 +124,7 @@ ActiveRecord::Schema.define(version: 20160201050042) do
     t.datetime "expiry_date",                                              null: false
     t.string   "image",               limit: 255,                          null: false
     t.integer  "org_company_id",      limit: 4
+    t.integer  "org_product_id",      limit: 4
     t.integer  "typ_category_id",     limit: 4
     t.integer  "typ_subcategory_id",  limit: 4
     t.integer  "trx_order_id",        limit: 4
@@ -139,96 +132,92 @@ ActiveRecord::Schema.define(version: 20160201050042) do
     t.decimal  "net_amount",                      precision: 20, scale: 4
     t.decimal  "tax_amount",                      precision: 20, scale: 4
     t.boolean  "delivery_status"
-    t.datetime "created_at",                                               null: false
-    t.datetime "updated_at",                                               null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "trx_orders", force: :cascade do |t|
     t.integer  "org_company_id",     limit: 4
     t.integer  "bill_to_contact_id", limit: 4
-    t.integer  "ship_to_order_id",   limit: 4
+    t.integer  "ship_to_contact_id", limit: 4
     t.integer  "trx_order_fee_id",   limit: 4
     t.decimal  "total_amount",                   precision: 20, scale: 4
     t.datetime "purchased_at"
     t.string   "transport_method",   limit: 255
-    t.datetime "created_at",                                              null: false
-    t.datetime "updated_at",                                              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "typ_categories", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "typ_companies", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "typ_contacts", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "typ_countries", force: :cascade do |t|
-    t.string   "iso",           limit: 255
-    t.string   "iso3",          limit: 255
-    t.string   "fips",          limit: 255
-    t.string   "country",       limit: 255
-    t.string   "continent",     limit: 255
-    t.string   "currency_code", limit: 255
-    t.string   "currency_name", limit: 255
-    t.string   "phone_prefix",  limit: 255
-    t.string   "postal_code",   limit: 255
-    t.string   "languages",     limit: 255
-    t.string   "geonameid",     limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string "iso",           limit: 255
+    t.string "iso3",          limit: 255
+    t.string "fips",          limit: 255
+    t.string "country",       limit: 255
+    t.string "continent",     limit: 255
+    t.string "currency_code", limit: 255
+    t.string "currency_name", limit: 255
+    t.string "phone_prefix",  limit: 255
+    t.string "postal_code",   limit: 255
+    t.string "languages",     limit: 255
+    t.string "geonameid",     limit: 255
   end
 
   create_table "typ_fees", force: :cascade do |t|
     t.string   "name",           limit: 255, null: false
     t.float    "fee_percentage", limit: 24,  null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "typ_positions", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "typ_regions", force: :cascade do |t|
     t.string   "name",           limit: 255
     t.string   "timezone",       limit: 255
     t.integer  "typ_country_id", limit: 4
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "typ_sales_taxes", force: :cascade do |t|
     t.float    "tax_rate",      limit: 24, null: false
     t.integer  "typ_region_id", limit: 4
     t.integer  "typ_tax_id",    limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "typ_subcategories", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.integer  "typ_category_id", limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string  "name",            limit: 255
+    t.integer "typ_category_id", limit: 4
   end
 
   create_table "typ_taxes", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

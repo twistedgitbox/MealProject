@@ -1,3 +1,3 @@
 class TypCompany < ActiveRecord::Base
-  has_many :org_companies
+	has_many :org_companies
 end
