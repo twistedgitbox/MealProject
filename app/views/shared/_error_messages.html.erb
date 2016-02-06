@@ -43,3 +43,19 @@
     </div>
   <% end %>
 <% end %>
+
+<% if @product %>
+  <% if @product.errors.any? %>
+    <div id="error explanation" class="col-md-12">
+      <div class="alert alert-danger" role="alert">
+        Ths form contains <%= pluralize(@product.errors.count, "error") %>
+    </div>
+    <ul>
+      <% @product.errors.each do |attr, msg| %>
+        <li>* <%= msg %></li>
+      <% end %>
+    </ul>
+    </div>
+  <% end %>
+<% end %>
+
