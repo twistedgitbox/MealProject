@@ -55,3 +55,9 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
+
+class ActionDispatch::Request
+  def ip
+    #put ip here
+  end
+end
